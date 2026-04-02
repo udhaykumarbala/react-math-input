@@ -1,0 +1,83 @@
+{
+  "name": "react-math-input",
+  "version": "1.0.0",
+  "description": "React components for math equation input — MathLive editor, symbol palette, KaTeX renderer",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./styles.css": "./dist/styles.css"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
+  "scripts": {
+    "build": "tsup && npm run build:css",
+    "build:css": "postcss src/styles.css -o dist/styles.css",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0",
+    "mathlive": ">=0.100.0",
+    "katex": ">=0.16.0"
+  },
+  "devDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "mathlive": "^0.109.0",
+    "katex": "^0.16.11",
+    "@types/katex": "^0.16.7",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.7.0",
+    "postcss": "^8.4.0",
+    "postcss-cli": "^11.0.0",
+    "autoprefixer": "^10.4.0",
+    "postcss-import": "^16.0.0",
+    "postcss-nesting": "^13.0.0"
+  },
+  "keywords": [
+    "react",
+    "math",
+    "latex",
+    "input",
+    "equation",
+    "editor",
+    "mathlive",
+    "katex",
+    "mathfield",
+    "tex",
+    "keyboard",
+    "formula",
+    "matrix"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/susanoox/react-math-input"
+  },
+  "homepage": "https://react-math-input.vercel.app",
+  "bugs": {
+    "url": "https://github.com/susanoox/react-math-input/issues"
+  }
+}

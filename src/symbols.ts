@@ -1,0 +1,71 @@
+export interface MathSymbol {
+  label: string;
+  latex: string;
+  tooltip: string;
+}
+
+export const SYMBOL_CATEGORIES: Record<string, MathSymbol[]> = {
+  Common: [
+    { label: "x/y", latex: "\\frac{#@}{#0}", tooltip: "Fraction" },
+    { label: "x\u00B2", latex: "#@^{#0}", tooltip: "Superscript" },
+    { label: "x\u2099", latex: "#@_{#0}", tooltip: "Subscript" },
+    { label: "\u221Ax", latex: "\\sqrt{#0}", tooltip: "Square root" },
+    { label: "\u207F\u221Ax", latex: "\\sqrt[#0]{#0}", tooltip: "Nth root" },
+    { label: "\u00B1", latex: "\\pm", tooltip: "Plus-minus" },
+    { label: "\u00D7", latex: "\\times", tooltip: "Multiply" },
+    { label: "\u00F7", latex: "\\div", tooltip: "Divide" },
+    { label: "\u2260", latex: "\\neq", tooltip: "Not equal" },
+    { label: "\u2248", latex: "\\approx", tooltip: "Approximately" },
+    { label: "\u221E", latex: "\\infty", tooltip: "Infinity" },
+    { label: "( )", latex: "\\left(#0\\right)", tooltip: "Parentheses" },
+  ],
+  Greek: [
+    { label: "\u03B1", latex: "\\alpha", tooltip: "Alpha" },
+    { label: "\u03B2", latex: "\\beta", tooltip: "Beta" },
+    { label: "\u03B3", latex: "\\gamma", tooltip: "Gamma" },
+    { label: "\u03B4", latex: "\\delta", tooltip: "Delta" },
+    { label: "\u03B8", latex: "\\theta", tooltip: "Theta" },
+    { label: "\u03BB", latex: "\\lambda", tooltip: "Lambda" },
+    { label: "\u03BC", latex: "\\mu", tooltip: "Mu" },
+    { label: "\u03C0", latex: "\\pi", tooltip: "Pi" },
+    { label: "\u03C3", latex: "\\sigma", tooltip: "Sigma" },
+    { label: "\u03C6", latex: "\\phi", tooltip: "Phi" },
+    { label: "\u03C9", latex: "\\omega", tooltip: "Omega" },
+    { label: "\u0394", latex: "\\Delta", tooltip: "Delta (upper)" },
+    { label: "\u03A3", latex: "\\Sigma", tooltip: "Sigma (upper)" },
+    { label: "\u03A9", latex: "\\Omega", tooltip: "Omega (upper)" },
+  ],
+  Operators: [
+    { label: "\u2264", latex: "\\leq", tooltip: "Less or equal" },
+    { label: "\u2265", latex: "\\geq", tooltip: "Greater or equal" },
+    { label: "\u2208", latex: "\\in", tooltip: "Element of" },
+    { label: "\u2209", latex: "\\notin", tooltip: "Not element of" },
+    { label: "\u2282", latex: "\\subset", tooltip: "Subset" },
+    { label: "\u222A", latex: "\\cup", tooltip: "Union" },
+    { label: "\u2229", latex: "\\cap", tooltip: "Intersection" },
+    { label: "\u2192", latex: "\\rightarrow", tooltip: "Right arrow" },
+    { label: "\u21D2", latex: "\\Rightarrow", tooltip: "Implies" },
+    { label: "\u21D4", latex: "\\Leftrightarrow", tooltip: "If and only if" },
+    { label: "\u2200", latex: "\\forall", tooltip: "For all" },
+    { label: "\u2203", latex: "\\exists", tooltip: "Exists" },
+  ],
+  Calculus: [
+    { label: "\u222B", latex: "\\int_{#0}^{#0}#0", tooltip: "Integral" },
+    { label: "\u03A3", latex: "\\sum_{#0}^{#0}#0", tooltip: "Summation" },
+    { label: "\u220F", latex: "\\prod_{#0}^{#0}#0", tooltip: "Product" },
+    { label: "lim", latex: "\\lim_{#0\\to #0}", tooltip: "Limit" },
+    { label: "d/dx", latex: "\\frac{d}{dx}", tooltip: "Derivative" },
+    { label: "\u2202", latex: "\\frac{\\partial}{\\partial #0}", tooltip: "Partial" },
+    { label: "\u2207", latex: "\\nabla", tooltip: "Nabla" },
+    { label: "log", latex: "\\log_{#0}", tooltip: "Logarithm" },
+    { label: "ln", latex: "\\ln", tooltip: "Natural log" },
+  ],
+  Matrices: [
+    { label: "2\u00D72", latex: "\\begin{pmatrix} #0 & #0 \\\\ #0 & #0 \\end{pmatrix}", tooltip: "2\u00D72 matrix" },
+    { label: "3\u00D73", latex: "\\begin{pmatrix} #0 & #0 & #0 \\\\ #0 & #0 & #0 \\\\ #0 & #0 & #0 \\end{pmatrix}", tooltip: "3\u00D73 matrix" },
+    { label: "|det|", latex: "\\begin{vmatrix} #0 & #0 \\\\ #0 & #0 \\end{vmatrix}", tooltip: "Determinant 2\u00D72" },
+    { label: "[2\u00D72]", latex: "\\begin{bmatrix} #0 & #0 \\\\ #0 & #0 \\end{bmatrix}", tooltip: "2\u00D72 bracket matrix" },
+    { label: "[3\u00D73]", latex: "\\begin{bmatrix} #0 & #0 & #0 \\\\ #0 & #0 & #0 \\\\ #0 & #0 & #0 \\end{bmatrix}", tooltip: "3\u00D73 bracket matrix" },
+    { label: "( | )", latex: "\\left(\\begin{array}{cc|c} #0 & #0 & #0 \\\\ #0 & #0 & #0 \\end{array}\\right)", tooltip: "Augmented matrix" },
+  ],
+};
