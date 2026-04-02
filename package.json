@@ -74,10 +74,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/susanoox/react-math-input"
+    "url": "https://github.com/udhaykumarbala/react-math-input"
   },
-  "homepage": "https://react-math-input.vercel.app",
+  "homepage": "https://github.com/udhaykumarbala/react-math-input#readme",
   "bugs": {
-    "url": "https://github.com/susanoox/react-math-input/issues"
+    "url": "https://github.com/udhaykumarbala/react-math-input/issues"
   }
 }
