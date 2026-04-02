@@ -1,0 +1,497 @@
+/* react-math-input — styles.css */
+/* Import this file: import 'react-math-input/styles.css' */
+
+/* ── MathEditor ── */
+
+.rmi-editor {
+  position: relative;
+  width: 100%;
+}
+
+.rmi-editor-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.rmi-fx-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  font-style: italic;
+  font-family: Georgia, serif;
+  color: #6b7280;
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.rmi-fx-btn:hover {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.rmi-fx-btn[data-active="true"] {
+  background: #2563eb;
+  color: #fff;
+  border-color: #2563eb;
+}
+
+.rmi-fx-btn[data-active="true"]:hover {
+  background: #1d4ed8;
+}
+
+.rmi-hint {
+  font-size: 10px;
+  color: #9ca3af;
+}
+
+.rmi-textarea {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  outline: none;
+  resize: vertical;
+  min-height: 44px;
+  box-sizing: border-box;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.rmi-textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.rmi-textarea[data-composer-open="true"] {
+  border-color: #93c5fd;
+  background: rgba(239, 246, 255, 0.3);
+}
+
+/* ── Composer ── */
+
+.rmi-composer {
+  margin-top: 8px;
+  padding: 12px;
+  border: 2px solid #3b82f6;
+  border-radius: 8px;
+  background: rgba(239, 246, 255, 0.5);
+}
+
+.rmi-composer-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #1d4ed8;
+  margin-bottom: 8px;
+}
+
+.rmi-composer-field {
+  background: #fff;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.rmi-composer-actions {
+  display: flex;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.rmi-btn-primary {
+  padding: 6px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+  background: #2563eb;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.rmi-btn-primary:hover {
+  background: #1d4ed8;
+}
+
+.rmi-btn-secondary {
+  padding: 6px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #4b5563;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.rmi-btn-secondary:hover {
+  background: #f9fafb;
+}
+
+/* ── Preview ── */
+
+.rmi-preview {
+  margin-top: 6px;
+  padding: 8px 12px;
+  background: #f9fafb;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+.rmi-preview-label {
+  display: block;
+  font-size: 10px;
+  color: #9ca3af;
+  margin-bottom: 4px;
+}
+
+.rmi-latex-error {
+  color: #ef4444;
+}
+
+/* ── Symbol Palette ── */
+
+.rmi-palette {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fafafa;
+  overflow: hidden;
+}
+
+.rmi-palette-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f3f4f6;
+  padding: 2px 2px 0;
+}
+
+.rmi-palette-tab {
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #6b7280;
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.rmi-palette-tab:hover {
+  color: #374151;
+  background: rgba(229, 231, 235, 0.6);
+}
+
+.rmi-palette-tab[data-active="true"] {
+  color: #2563eb;
+  background: #fff;
+  border-color: #e5e7eb;
+  border-bottom-color: #fff;
+  margin-bottom: -1px;
+}
+
+.rmi-palette-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(48px, 1fr));
+  gap: 4px;
+  padding: 8px;
+}
+
+.rmi-symbol-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  font-size: 16px;
+  color: #374151;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.rmi-symbol-btn:hover {
+  background: #eff6ff;
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+.rmi-symbol-btn:active {
+  transform: scale(0.95);
+}
+
+/* ── QuestionForm ── */
+
+.rmi-form {
+  max-width: 768px;
+}
+
+.rmi-form > * + * {
+  margin-top: 24px;
+}
+
+.rmi-field-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.rmi-input {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.rmi-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.rmi-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.rmi-option-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  background: #f9fafb;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.rmi-option-row + .rmi-option-row {
+  margin-top: 12px;
+}
+
+.rmi-option-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: #e5e7eb;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+  color: #374151;
+  flex-shrink: 0;
+  margin-top: 28px;
+}
+
+.rmi-option-editor {
+  flex: 1;
+  min-width: 0;
+}
+
+.rmi-option-correct {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-top: 28px;
+  flex-shrink: 0;
+}
+
+.rmi-option-correct input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #2563eb;
+}
+
+.rmi-option-correct span {
+  font-size: 10px;
+  color: #9ca3af;
+  text-transform: uppercase;
+}
+
+.rmi-remove-btn {
+  background: transparent;
+  border: none;
+  color: #d1d5db;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 4px;
+  margin-top: 28px;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.rmi-remove-btn:hover {
+  color: #ef4444;
+}
+
+.rmi-add-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 8px;
+  font-size: 13px;
+  color: #6b7280;
+  background: transparent;
+  border: 1px dashed #d1d5db;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: all 0.15s ease;
+}
+
+.rmi-add-option:hover {
+  color: #2563eb;
+  border-color: #2563eb;
+  background: #eff6ff;
+}
+
+.rmi-actions {
+  display: flex;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+.rmi-btn-submit {
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background: #2563eb;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.rmi-btn-submit:hover {
+  background: #1d4ed8;
+}
+
+.rmi-btn-outline {
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.rmi-btn-outline:hover {
+  background: #f9fafb;
+}
+
+/* ── Preview Panel ── */
+
+.rmi-preview-panel {
+  padding: 16px;
+  background: #eff6ff;
+  border-radius: 8px;
+  border: 1px solid #bfdbfe;
+}
+
+.rmi-preview-panel h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e40af;
+  margin: 0 0 12px;
+}
+
+.rmi-preview-question {
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.rmi-preview-option {
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+}
+
+.rmi-preview-option + .rmi-preview-option {
+  margin-top: 6px;
+}
+
+.rmi-preview-option[data-correct="true"] {
+  background: #dcfce7;
+  border-color: #86efac;
+}
+
+.rmi-preview-explanation {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #bfdbfe;
+  font-size: 14px;
+  color: #1e3a5f;
+}
+
+.rmi-json-output {
+  padding: 16px;
+  background: #111827;
+  color: #e5e7eb;
+  border-radius: 8px;
+  font-size: 12px;
+  font-family: monospace;
+  overflow: auto;
+  max-height: 320px;
+  white-space: pre-wrap;
+}
+
+.rmi-palette-hint {
+  font-size: 12px;
+  color: #9ca3af;
+  margin-bottom: 6px;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 640px) {
+  .rmi-palette-grid {
+    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+  }
+
+  .rmi-palette-tab {
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+
+  .rmi-option-row {
+    flex-wrap: wrap;
+  }
+
+  .rmi-form-row {
+    grid-template-columns: 1fr;
+  }
+}
