@@ -1,6 +1,6 @@
 {
   "name": "react-math-input",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "React components for math equation input — MathLive editor, symbol palette, KaTeX renderer",
   "type": "module",
   "main": "./dist/index.cjs",
