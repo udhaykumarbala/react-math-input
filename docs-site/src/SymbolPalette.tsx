@@ -3,7 +3,7 @@ import { SYMBOL_CATEGORIES } from "./symbols";
 import type { MathEditorRef } from "./MathEditor";
 import type { MathSymbol } from "./symbols";
 
-interface SymbolPaletteProps {
+export interface SymbolPaletteProps {
   targetRef: React.RefObject<MathEditorRef | null>;
   /** Custom symbol categories — overrides defaults if provided */
   categories?: Record<string, MathSymbol[]>;
@@ -37,7 +37,7 @@ export default function SymbolPalette({
     <div
       className={`rmi-palette ${className}`}
       data-size={size}
-      data-disabled={disabled || undefined}
+      data-disabled={disabled ? "true" : undefined}
     >
       <div className="rmi-palette-tabs">
         {categoryNames.map((cat) => (

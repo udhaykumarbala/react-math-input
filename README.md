@@ -89,8 +89,8 @@ Renders text containing `$...$` (inline) and `$$...$$` (display) LaTeX.
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `text` | `string` | — | Text with LaTeX delimiters |
-| `onError` | `(error: Error) => void` | — | Called when KaTeX rendering fails |
-| `fallback` | `ReactNode` | — | Shown in place of broken LaTeX on render error |
+| `onError` | `(latex: string, error: Error) => void` | — | Called when a LaTeX expression fails to parse |
+| `fallback` | `(latex: string) => string` | — | Returns custom HTML for invalid LaTeX |
 | `className` | `string` | `""` | Additional CSS class |
 
 ```tsx

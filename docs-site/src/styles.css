@@ -198,6 +198,16 @@
   box-shadow: 0 0 0 3px var(--rmi-color-error-ring);
 }
 
+.rmi-mathfield {
+  min-height: var(--rmi-composer-min-height);
+  font-size: var(--rmi-composer-font-size);
+  padding: 10px 14px;
+  border-radius: var(--rmi-radius);
+  border: 2px solid var(--rmi-color-primary);
+  background: var(--rmi-color-bg);
+  color: var(--rmi-color-text);
+}
+
 /* ── MathEditor ── */
 
 .rmi-editor {
@@ -396,7 +406,7 @@
 
 .rmi-palette-tab:hover {
   color: var(--rmi-color-text);
-  background: rgba(229, 231, 235, 0.6);
+  background: var(--rmi-color-bg-muted);
 }
 
 .rmi-palette-tab[data-active="true"] {
@@ -436,6 +446,11 @@
 
 .rmi-symbol-btn:active {
   transform: scale(0.95);
+}
+
+.rmi-palette[data-disabled="true"] {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 /* ── QuestionForm ── */

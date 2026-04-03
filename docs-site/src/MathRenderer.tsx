@@ -39,11 +39,13 @@ interface RenderOptions {
 export function renderLatexString(text: string, options?: RenderOptions): string {
   if (!text) return "";
 
+  const hasErrorHandlers = !!(options?.onError || options?.fallback);
+
   const renderSingle = (latex: string, displayMode: boolean): string => {
     try {
       return katex.renderToString(latex.trim(), {
         displayMode,
-        throwOnError: false,
+        throwOnError: hasErrorHandlers,
       });
     } catch (e) {
       const error = e instanceof Error ? e : new Error(String(e));

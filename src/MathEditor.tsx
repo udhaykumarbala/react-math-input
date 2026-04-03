@@ -88,12 +88,8 @@ const MathEditor = forwardRef<MathEditorRef, MathEditorProps>(
       mf.setAttribute("virtual-keyboard-mode", "manual");
       mf.setAttribute("smart-superscript", "");
       mf.setAttribute("smart-fence", "");
+      mf.classList.add("rmi-mathfield");
       mf.style.width = "100%";
-      mf.style.minHeight = "48px";
-      mf.style.fontSize = "20px";
-      mf.style.padding = "10px 14px";
-      mf.style.borderRadius = "6px";
-      mf.style.border = "2px solid #3b82f6";
       mf.value = "";
 
       composerContainerRef.current.innerHTML = "";
@@ -177,9 +173,9 @@ const MathEditor = forwardRef<MathEditorRef, MathEditorProps>(
       <div
         className={`rmi-editor ${className}`}
         data-size={size}
-        data-disabled={disabled || undefined}
-        data-readonly={readOnly || undefined}
-        data-error={error || undefined}
+        data-disabled={disabled ? "true" : undefined}
+        data-readonly={readOnly ? "true" : undefined}
+        data-error={error ? "true" : undefined}
       >
         {name && <input type="hidden" name={name} value={currentValue} />}
         <div className="rmi-editor-toolbar">
