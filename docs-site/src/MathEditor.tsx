@@ -17,28 +17,55 @@ export interface MathEditorRef {
   focus: () => void;
 }
 
-interface MathEditorProps {
-  placeholder?: string;
+export interface MathEditorProps {
+  /** Controlled value */
+  value?: string;
+  /** Default value for uncontrolled mode */
+  defaultValue?: string;
+  /** @deprecated Use defaultValue instead */
   initialValue?: string;
-  onChange?: (latex: string) => void;
+  placeholder?: string;
+  /** Field name — renders a hidden <input> for native form submission */
+  name?: string;
+  onChange?: (value: string) => void;
   onFocus?: () => void;
+  onBlur?: () => void;
   className?: string;
   showPreview?: boolean;
+  size?: "sm" | "md" | "lg";
+  disabled?: boolean;
+  readOnly?: boolean;
+  error?: boolean;
 }
 
 const MathEditor = forwardRef<MathEditorRef, MathEditorProps>(
   (
     {
+      value: controlledValue,
+      defaultValue,
+      initialValue,
       placeholder = "",
-      initialValue = "",
+      name,
       onChange,
       onFocus,
+      onBlur,
       className = "",
       showPreview = true,
+      size,
+      disabled,
+      readOnly,
+      error,
     },
     ref
   ) => {
-    const [value, setValue] = useState(initialValue);
+    const isControlled = controlledValue !== undefined;
+    const [internalValue, setInternalValue] = useState(defaultValue ?? initialValue ?? "");
+    const currentValue = isControlled ? controlledValue : internalValue;
+
+    const updateValue = useCallback((newVal: string) => {
+      if (!isControlled) setInternalValue(newVal);
+      onChange?.(newVal);
+    }, [isControlled, onChange]);
     const [composerOpen, setComposerOpen] = useState(false);
     const [mathliveLoaded, setMathliveLoaded] = useState(false);
 
@@ -83,11 +110,12 @@ const MathEditor = forwardRef<MathEditorRef, MathEditorProps>(
     };
 
     const openComposer = useCallback(async () => {
+      if (disabled || readOnly) return;
       saveCursor();
       await loadMathLive();
       mfRef.current = null;
       setComposerOpen(true);
-    }, [loadMathLive]);
+    }, [loadMathLive, disabled, readOnly]);
 
     const closeComposer = () => {
       if (composerContainerRef.current) composerContainerRef.current.innerHTML = "";
@@ -106,12 +134,11 @@ const MathEditor = forwardRef<MathEditorRef, MathEditorProps>(
 
       const insertion = `$${latex}$`;
       const pos = cursorPosRef.current;
-      const before = value.slice(0, pos);
-      const after = value.slice(pos);
+      const before = currentValue.slice(0, pos);
+      const after = currentValue.slice(pos);
       const newVal = before + insertion + after;
 
-      setValue(newVal);
-      onChange?.(newVal);
+      updateValue(newVal);
 
       if (composerContainerRef.current) composerContainerRef.current.innerHTML = "";
       mfRef.current = null;
@@ -128,16 +155,16 @@ const MathEditor = forwardRef<MathEditorRef, MathEditorProps>(
     };
 
     const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      if (disabled || readOnly) return;
       const newVal = e.target.value;
-      setValue(newVal);
-      onChange?.(newVal);
+      updateValue(newVal);
     };
 
-    const hasLatex = value.includes("$");
+    const hasLatex = currentValue.includes("$");
 
     useImperativeHandle(ref, () => ({
-      getValue: () => value,
-      setValue: (latex: string) => setValue(latex),
+      getValue: () => currentValue,
+      setValue: (latex: string) => updateValue(latex),
       getMathField: () => mfRef.current,
       isMathMode: () => composerOpen,
       focus: () => {
@@ -147,7 +174,14 @@ const MathEditor = forwardRef<MathEditorRef, MathEditorProps>(
     }));
 
     return (
-      <div className={`rmi-editor ${className}`}>
+      <div
+        className={`rmi-editor ${className}`}
+        data-size={size}
+        data-disabled={disabled || undefined}
+        data-readonly={readOnly || undefined}
+        data-error={error || undefined}
+      >
+        {name && <input type="hidden" name={name} value={currentValue} />}
         <div className="rmi-editor-toolbar">
           <button
             type="button"
@@ -155,6 +189,7 @@ const MathEditor = forwardRef<MathEditorRef, MathEditorProps>(
             className="rmi-fx-btn"
             data-active={composerOpen}
             title="Insert equation"
+            disabled={disabled || readOnly}
           >
             fx
           </button>
@@ -165,16 +200,18 @@ const MathEditor = forwardRef<MathEditorRef, MathEditorProps>(
 
         <textarea
           ref={textRef}
-          value={value}
+          value={currentValue}
           onChange={handleTextChange}
           onFocus={onFocus}
-          onBlur={saveCursor}
+          onBlur={() => { saveCursor(); onBlur?.(); }}
           onClick={saveCursor}
           onKeyUp={saveCursor}
           placeholder={placeholder}
           rows={3}
           className="rmi-textarea"
           data-composer-open={composerOpen}
+          disabled={disabled}
+          readOnly={readOnly}
         />
 
         {composerOpen && (
@@ -197,7 +234,7 @@ const MathEditor = forwardRef<MathEditorRef, MathEditorProps>(
         {showPreview && hasLatex && !composerOpen && (
           <div className="rmi-preview">
             <span className="rmi-preview-label">Preview</span>
-            <MathRenderer text={value} />
+            <MathRenderer text={currentValue} />
           </div>
         )}
       </div>

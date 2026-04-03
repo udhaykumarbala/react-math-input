@@ -7,7 +7,7 @@ export default function Home() {
       <section className="border-b border-gray-200 bg-gradient-to-b from-blue-50 to-white">
         <div className="max-w-4xl mx-auto px-6 py-16 text-center">
           <div className="inline-block px-3 py-1 mb-4 text-xs font-medium text-blue-700 bg-blue-100 rounded-full">
-            v1.0.1 — Open Source
+            v1.1.0 — Open Source
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4 tracking-tight">
             react-math-input
