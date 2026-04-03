@@ -4,51 +4,62 @@ import katex from "katex";
 interface MathRendererProps {
   text: string;
   className?: string;
+  /** Called when a LaTeX expression fails to parse */
+  onError?: (latex: string, error: Error) => void;
+  /** Custom fallback for invalid LaTeX (receives the raw LaTeX string) */
+  fallback?: (latex: string) => string;
 }
 
-/**
- * Renders a string containing LaTeX delimiters ($...$ and $$...$$) into
- * formatted HTML using KaTeX. Plain text passes through unchanged.
- *
- * Requires: `import 'katex/dist/katex.min.css'` in your app, or
- * `import 'react-math-input/styles.css'`.
- */
-export default function MathRenderer({ text, className = "" }: MathRendererProps) {
-  const html = useMemo(() => renderLatexString(text), [text]);
+export default function MathRenderer({
+  text,
+  className = "",
+  onError,
+  fallback,
+}: MathRendererProps) {
+  const html = useMemo(
+    () => renderLatexString(text, { onError, fallback }),
+    [text, onError, fallback]
+  );
 
   return (
     <div
       className={className}
+      role="math"
+      aria-label={text}
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );
 }
 
-/** Parse and render LaTeX delimiters in a string, returning safe HTML. */
-export function renderLatexString(text: string): string {
+interface RenderOptions {
+  onError?: (latex: string, error: Error) => void;
+  fallback?: (latex: string) => string;
+}
+
+export function renderLatexString(text: string, options?: RenderOptions): string {
   if (!text) return "";
 
-  let result = text.replace(/\$\$([\s\S]+?)\$\$/g, (_match, latex: string) => {
+  const renderSingle = (latex: string, displayMode: boolean): string => {
     try {
       return katex.renderToString(latex.trim(), {
-        displayMode: true,
+        displayMode,
         throwOnError: false,
       });
-    } catch {
-      return `<span class="rmi-latex-error" title="Invalid LaTeX">${escapeHtml(latex)}</span>`;
+    } catch (e) {
+      const error = e instanceof Error ? e : new Error(String(e));
+      options?.onError?.(latex, error);
+      if (options?.fallback) return options.fallback(latex);
+      return `<span class="rmi-latex-error" title="${escapeHtml(error.message)}">${escapeHtml(latex)}</span>`;
     }
-  });
+  };
 
-  result = result.replace(/\$([^$]+?)\$/g, (_match, latex: string) => {
-    try {
-      return katex.renderToString(latex.trim(), {
-        displayMode: false,
-        throwOnError: false,
-      });
-    } catch {
-      return `<span class="rmi-latex-error" title="Invalid LaTeX">${escapeHtml(latex)}</span>`;
-    }
-  });
+  let result = text.replace(/\$\$([\s\S]+?)\$\$/g, (_m, latex: string) =>
+    renderSingle(latex, true)
+  );
+
+  result = result.replace(/\$([^$]+?)\$/g, (_m, latex: string) =>
+    renderSingle(latex, false)
+  );
 
   result = result.replace(/\n/g, "<br/>");
 
@@ -56,9 +67,5 @@ export function renderLatexString(text: string): string {
 }
 
 function escapeHtml(str: string): string {
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
+  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
